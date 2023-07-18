@@ -79,11 +79,3 @@ img {
   pointer-events: none;
   opacity: 0.3;
 }
-
-#alert {
-  display: none;
-  position: absolute;
-  top: 40%;
-  right: 35%;
-  z-index: 1;
-}

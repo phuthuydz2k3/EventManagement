@@ -3,14 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../api';
 import Design from './img/download.svg';
 import Design2 from './img/download1.svg';
+import Alert from './Alert'
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     let role = useRef('');
-    const alert = document.getElementById("alert");
     const form = document.getElementById("form");
+    const [pValue, setPValue] = useState("Choose a role by click in the according button on the screen.");
+    const [strongValue, setStrongValue] = useState("You need to choose your role");
+    const [alertDisplay, setAlertDisplay] = useState(false);
+
+    const handleAlertDisplay = (p, strong) => {
+        setPValue(p);
+        setStrongValue(strong)
+        setAlertDisplay(!alertDisplay);
+    }
 
     useEffect(() => {
         const card1 = document.getElementById("card1");
@@ -87,12 +96,13 @@ const LoginForm = () => {
         event.preventDefault();
 
         if (role.current === '') {
-            alert.style.display = 'block';
+            handleAlertDisplay("Choose a role by click in the according button on the screen.",
+                "You need to choose your role!");
             form.classList.add('disabled-overlay');
             document.body.addEventListener('click', () => {
                 form.classList.remove('disabled-overlay');
-                alert.style.display = 'none';
-            });
+                setAlertDisplay(false);
+            })
         } else {
             try {
                 const { success, sessionToken, error } = await login(
@@ -114,8 +124,13 @@ const LoginForm = () => {
                     navigate('/employee/home');
                 }
             } else {
-              // Login failed
-              console.log('Login failed:', error);
+                handleAlertDisplay("Please enter the username and password again.",
+                    "Incorrect username and password!");
+                form.classList.add('disabled-overlay');
+                document.body.addEventListener('click', () => {
+                    form.classList.remove('disabled-overlay');
+                    setAlertDisplay(false);
+                })
             }
           } catch (error) {
             console.error('An error occurred during login:', error);
@@ -125,28 +140,7 @@ const LoginForm = () => {
 
     return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div role="alert" id="alert" className="absolute rounded border-s-4 border-red-500 bg-red-50 p-4">
-            <div className="flex items-center gap-2 text-red-800">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="h-5 w-5"
-                >
-                    <path
-                        fillRule="evenodd"
-                        d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                        clipRule="evenodd"
-                    />
-                </svg>
-
-                <strong className="block font-medium"> You need to choose your role </strong>
-            </div>
-
-            <p className="mt-2 text-sm text-red-700">
-                Choose a role by click in the according button on the screen.
-            </p>
-        </div>
+        {alertDisplay && <Alert p={pValue} strong={strongValue}/>}
         <div className="form" id="form">
             <div className="cards">
                 <div href="" className="card group relative block h-64 sm:h-80 lg:h-96" id="card1">

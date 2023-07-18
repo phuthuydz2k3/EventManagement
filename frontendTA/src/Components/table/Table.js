@@ -4,6 +4,7 @@ import 'flowbite';
 import Search from "./Search";
 import {useState} from "react";
 import events from './eventsData'
+import Sort from "./Sort";
 
 const Table = () => {
 
@@ -115,6 +116,7 @@ const Table = () => {
                             </ul>
                         </div>
                     </div>
+                    <Sort />
                     <Search onSearch={handleSearch} />
                 </div>
                 <section className="table__body">
