@@ -1,5 +1,5 @@
 {
-  "name": "eventmanagement",
+  "title": "eventmanagement",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/khoaihps/EventManagement#readme",
   "dependencies": {
-    "concurrently": "^8.2.0"
+    "boxicons": "^2.1.4",
+    "concurrently": "^8.2.0",
+    "flowbite": "^1.7.0",
+    "flowbite-react": "^0.4.11",
+    "react-icons": "^4.10.1"
   }
 }

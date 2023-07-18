@@ -1,0 +1,30 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 150px; /* Adjusted the initial width */
+    background: #fff;
+    padding: 15px 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    transition: 0.4s ease;
+    z-index: 2;
+}
+
+.sidebar:hover {
+    width: 250px;
+}
+
+.sidebar:hover span {
+    opacity: 1;
+}
+
+.sidebar span {
+    opacity: 0;
+    transition: 0.4s ease;
+}
+
+.sidebar .logo {
+    height: 30px;
+    width: 30px;
+}

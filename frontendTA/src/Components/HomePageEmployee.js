@@ -1,13 +1,14 @@
 import React from 'react';
-import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+import Table from "./table/Table";
+import Header from "./Header";
 
 const HomePageEmployee = () => {
-    // Check user session or token here
-
     return (
         <div>
-            <Navbar/>
-            <h1>Welcome!</h1>
+            <Header title={"Events"} />
+            <Sidebar/>
+            <Table />
         </div>
     );
 };
