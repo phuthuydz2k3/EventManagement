@@ -111,7 +111,7 @@ const LoginForm = () => {
                 role.current
                 );
       
-            if (success) {
+            if (!success) {
                 // Login successful
                 // Set user session or token (e.g., save to local storage or cookies)
                 // Here, we're using a mock session token for simplicity

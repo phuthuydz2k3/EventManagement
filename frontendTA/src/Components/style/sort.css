@@ -1,0 +1,12 @@
+.sort {
+    position: absolute;
+    right: 700px;
+    top: 35px;
+}
+
+#listSort {
+    position: absolute;
+    top: 35px;
+    right: -190px;
+    z-index: 11;
+}

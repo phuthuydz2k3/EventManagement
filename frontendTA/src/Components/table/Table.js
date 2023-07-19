@@ -35,6 +35,52 @@ const Table = () => {
         setFilteredData(filtered);
     };
 
+    const handleSort = (sortKey) => {
+        if (sortKey === 'Title')
+        {
+            sortKey = 'name'
+        }
+        else if (sortKey === "Location")
+        {
+            sortKey = 'place'
+        }
+        else
+        {
+            sortKey = sortKey.toLowerCase();
+        }
+
+        if (sortKey === 'id')
+        {
+            const sortedData = [...filteredData].sort((a, b) =>
+                parseInt(a[sortKey]) - parseInt(b[sortKey]));
+            setFilteredData(sortedData);
+        }
+        else if (sortKey === 'budget')
+        {
+            const sortedData = [...filteredData].sort((a, b) => {
+                const numA = parseInt(a[sortKey].replace(/[$,]/g, ''));
+                const numB = parseInt(b[sortKey].replace(/[$,]/g, ''));
+                return numA - numB;
+            });
+            setFilteredData(sortedData);
+        }
+        else if (sortKey === 'deadline')
+        {
+            const sortedData = [...filteredData].sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateA - dateB;
+            });
+            setFilteredData(sortedData)
+        }
+        else
+        {
+            const sortedData = [...filteredData].sort((a, b) =>
+                a[sortKey].localeCompare(b[sortKey]));
+            setFilteredData(sortedData);
+        }
+    }
+
     const styles = {
         position: 'absolute',
         inset: 'auto auto 0px 0px',
@@ -116,7 +162,7 @@ const Table = () => {
                             </ul>
                         </div>
                     </div>
-                    <Sort />
+                    <Sort onSort={handleSort}/>
                     <Search onSearch={handleSearch} />
                 </div>
                 <section className="table__body">

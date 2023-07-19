@@ -5,7 +5,7 @@ const events = [
         place: 'Location C',
         deadline: '2023-12-10',
         status: 'Completed',
-        budget: 10000,
+        budget: "$10,000",
     },
     {
         id: '1',

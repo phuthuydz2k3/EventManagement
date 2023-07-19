@@ -1,25 +1,22 @@
 import React, {useState} from "react";
+import '../style/sort.css'
 
-const Sort = () => {
+const Sort = ({ onSort }) => {
 
     const [divDisplayStyle, setDivDisplayStyle] = useState('none');
-    const [searchKey, setSearchKey] = useState('Title');
-    const [searchInput, setSearchInput] = useState('');
-
-    const handleSearchInputChange = (event) => {
-        setSearchInput(event.target.value);
-    };
+    const [sortKey, setSortKey] = useState('Id');
 
     const handleSearchKey = (event) => {
-        setSearchKey(event.target.innerHTML)
+        setSortKey(event.target.innerHTML)
         handleButtonClick();
+        onSort(event.target.innerHTML)
     }
     const handleButtonClick = () => {
         setDivDisplayStyle(divDisplayStyle === 'block' ? 'none' : 'block');
     };
 
     return (
-        <div className="relative">
+        <div className="sort">
             <div className="absolute flex items-center pl-3 h-5">
                 <div
                     className="h-8 inline-flex items-center overflow-hidden rounded-md bg-white border"
@@ -34,7 +31,7 @@ const Sort = () => {
                         id="button" className="button h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700"
                         onClick={handleButtonClick}
                     >
-                        <span className="key mr-3">{searchKey}</span>
+                        <span className="key mr-3">{sortKey}</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-4 w-4"
@@ -50,9 +47,9 @@ const Sort = () => {
                     </button>
                 </div>
             </div>
-            <div id="list" style={{ display: divDisplayStyle }} className="relative">
+            <div id="listSort" style={{ display: divDisplayStyle }} className="relative">
                 <div
-                    className="absolute end-0 z-20 top-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg"
+                    className="end-0 z-20 top-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg"
                     role="menu"
                 >
                     <div className="p-2">
